@@ -6,18 +6,18 @@ module.exports={
         const displayname = body.username
         const email = body.email
         const password = body.password
-        const adminexist = await Admin.find()
-        if(!adminexist){
+        const userExist = await User.find()
+        if(!userExist){
             res.status(409).json({
-                msg:"Admin Already exist"
+                msg:"User Already exist"
             })
         }else{
             const newUser = new User()
             newUser.displayname = displayname
             newUser.email = email
-            newUser.password = newAdmin.hashPassword(password)
+            newUser.password = newUser.hashPassword(password)
             await newUser.save()
-            res.status(200).json({
+            res.status(201).json({
                 msg:"User Created"
             })
         }
@@ -30,7 +30,7 @@ module.exports={
         const data = await User.findOne({email:email})
         if(!data){
             res.status(200).json({
-                msg:"Admin Not Exist"
+                msg:"User Not Exist"
             })
         }
         else {

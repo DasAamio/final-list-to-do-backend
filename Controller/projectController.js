@@ -8,28 +8,28 @@ module.exports={
         const description = body.description
         const isImportant = body.isImportant
         const deadline = body.deadline
-        const task = body.task
+        const tasks = body.tasks
         const status = body.status
         const newProject = new Project()
         newProject.title = title
         newProject.description = description
         newProject.isImportant = isImportant
         newProject.deadline = deadline
-        newProject.task = task
+        newProject.tasks = tasks
         newProject.status = status
         await newProject.save()
         res.status(200).json({
             msg: 'Project Added'
         })
     },
-    updateProject: async (res,req)=>{
+    updateProject: async (req, res)=>{
         const body = req.body
+        console.log(body)
         const _id = body.id
         const newData = await Project.findOneAndUpdate({_id : _id },{$set:body})
         res.status(200).json({
             msg: 'Project Updated'
         })
-
     },
     deleteProject: async (req,res)=>{
         const body = req.body
@@ -54,7 +54,7 @@ module.exports={
     singleProject: async (req,res)=>{
         const body = req.body
         const _id = body.id
-        const data = await Project.find({isdelete: 'No',_id:_id})
+        const data = await Project.find({isdelete: 'No',_id:_id}).populate('tasks')
         res.status(200).json(data)
     }
 
