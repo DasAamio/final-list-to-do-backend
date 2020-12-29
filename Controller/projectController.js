@@ -46,14 +46,14 @@ module.exports={
         res.status(200).json(data)
     },
     projectBystatus: async (req,res)=>{
-        const body = req.body
-        const status = body.status
+        const params = req.params
+        const status = params.status
         const data = await Project.find({status:status,isdelete: 'No'}).populate('tasks')
         res.status(200).json(data)
     },
     singleProject: async (req,res)=>{
-        const body = req.body
-        const _id = body.id
+        const params = req.params
+        const _id = params.id
         const data = await Project.find({isdelete: 'No',_id:_id}).populate('tasks')
         res.status(200).json(data)
     }

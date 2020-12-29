@@ -10,9 +10,9 @@ router.route('/deleteproject')
     .post(Project.deleteProject)
 router.route('/allproject')
     .get(Project.allProject)
-router.route('/proectbystatus')
+router.route('/proectbystatus/:status')
     .get(Project.projectBystatus)
-router.route('/singleproject')
+router.route('/singleproject/:id')
     .get(Project.singleProject)
 
 module.exports = router
